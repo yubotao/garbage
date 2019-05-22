@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Auther: yubt
- * @Description: 向列表中插入数据并自动排序，保证不会出现两条记录的position相同；默认原始列表已经按照position进行了排序
+ * @Auther:
+ * @Description: 向列表中插入数据并自动排序，保证不会出现两条记录的position相同
  * @Date: Created in 17:10 2019/5/21
  * @Modified By:
  */
@@ -24,32 +24,32 @@ public class PositionHelper {
         System.out.println(original);
     }
 
-    public static void autoPosition(T t, List<T> tList){
+    public static <S extends U> void autoPosition(S s, List<S> sList){
         // 找到该条数据处于队列中的哪个位置
         int index = 0;
-        for (T peerT : tList){
+        for (S peerT : sList){
             // 新增的条目与队列中的原有数据位置相同
-            if (t.getPosition() == peerT.getPosition()){
+            if (s.getPosition() == peerT.getPosition()){
                 // 修改原有数据的位置
-                peerT.setPosition(t.getPosition() + 1);
+                peerT.setPosition(s.getPosition() + 1);
                 // 存储操作
-                tList.add(index++, t);
+                sList.add(index++, s);
                 break;
             }
             index++;
         }
-        int size = tList.size();
+        int size = sList.size();
         // 比对到倒数第二个元素，如果相同，最后一个元素会修改值
         for (int i = index; i < size - 1; i++){
             // 如果检测到队列中不再存在相同位置的条目，则退出循环，完成所有操作
-            if(!positionPlus(tList.get(i), tList.get(i+1))) break;
+            if(!positionPlus(sList.get(i), sList.get(i+1))) break;
         }
     }
 
-    private static boolean positionPlus(T t, T nextT){
+    private static <S extends U> boolean positionPlus(S s, S nextS){
         boolean flag = false;
-        if (t.getPosition() == nextT.getPosition()){
-            nextT.setPosition(t.getPosition() + 1);
+        if (s.getPosition() == nextS.getPosition()){
+            nextS.setPosition(s.getPosition() + 1);
             flag = true;
         }
         return flag;
@@ -57,7 +57,7 @@ public class PositionHelper {
 
 }
 
-class T {
+class T implements U{
     String name;
     int position;
 
@@ -89,4 +89,9 @@ class T {
                 ", position=" + position +
                 '}';
     }
+}
+
+interface U {
+    int getPosition();
+    void setPosition(int position);
 }
