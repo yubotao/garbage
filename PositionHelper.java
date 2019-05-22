@@ -57,9 +57,8 @@ public class PositionHelper {
 
 }
 
-class T implements U{
+class T extends U{
     String name;
-    int position;
 
     T(String name, int position){
         this.name = name;
@@ -74,14 +73,6 @@ class T implements U{
         this.name = name;
     }
 
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
     @Override
     public String toString() {
         return "T{" +
@@ -91,7 +82,13 @@ class T implements U{
     }
 }
 
-interface U {
-    int getPosition();
-    void setPosition(int position);
+class U {
+    public int position;
+
+    int getPosition(){
+        return position;
+    }
+    void setPosition(int position){
+        this.position = position;
+    }
 }
