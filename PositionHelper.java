@@ -3,7 +3,7 @@ import java.util.List;
 
 /**
  * @Auther:
- * @Description: 向列表中插入数据并自动排序，保证不会出现两条记录的position相同
+ * @Description: 向列表中插入数据并自动排序，保证不会出现两条记录的position相同；默认原始列表已经按照position进行了排序
  * @Date: Created in 17:10 2019/5/21
  * @Modified By:
  */
